@@ -94,6 +94,10 @@
       <Project>{41a44ecb-ed40-4a73-b648-9db9d4d35125}</Project>
       <Name>CherryQuest.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CherryQuestProject\CherryQuestProject.csproj">
+      <Project>{1f6f6f54-fa9b-49f6-9cd9-c6cd5a1b5afa}</Project>
+      <Name>CherryQuestProject</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

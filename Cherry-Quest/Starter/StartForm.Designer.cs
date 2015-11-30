@@ -32,6 +32,7 @@
             this.exitButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.InitializeTextBox = new System.Windows.Forms.TextBox();
+            this.startButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // exitButton
@@ -63,6 +64,16 @@
             this.InitializeTextBox.Size = new System.Drawing.Size(335, 95);
             this.InitializeTextBox.TabIndex = 2;
             // 
+            // startButton
+            // 
+            this.startButton.Location = new System.Drawing.Point(587, 20);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(75, 23);
+            this.startButton.TabIndex = 3;
+            this.startButton.Text = "Start";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
             // StarterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -70,6 +81,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(674, 329);
+            this.Controls.Add(this.startButton);
             this.Controls.Add(this.InitializeTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.exitButton);
@@ -85,6 +97,7 @@
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox InitializeTextBox;
+        private System.Windows.Forms.Button startButton;
     }
 }
 

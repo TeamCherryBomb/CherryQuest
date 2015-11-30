@@ -1,6 +1,6 @@
 ﻿namespace CherryQuestProject
 {
-    partial class Form1
+    partial class frmGameField
     {
         /// <summary>
         /// Required designer variable.
@@ -28,20 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.exiButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // Form1
+            // exiButton
+            // 
+            this.exiButton.Location = new System.Drawing.Point(1011, 12);
+            this.exiButton.Name = "exiButton";
+            this.exiButton.Size = new System.Drawing.Size(75, 23);
+            this.exiButton.TabIndex = 0;
+            this.exiButton.Text = "Exit";
+            this.exiButton.UseVisualStyleBackColor = true;
+            this.exiButton.Click += new System.EventHandler(this.exiButton_Click);
+            // 
+            // frmGameField
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(633, 262);
-            this.Name = "Form1";
+            this.ClientSize = new System.Drawing.Size(1098, 384);
+            this.Controls.Add(this.exiButton);
+            this.Name = "frmGameField";
             this.Text = "Form1";
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Button exiButton;
     }
 }
 

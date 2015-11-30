@@ -11,7 +11,9 @@ using System.Windows.Forms;
 namespace Starter
 {
     using System.Data.SqlClient;
+    using System.Deployment.Application;
     using CherryQuest.Data;
+    using CherryQuestProject;
 
     public partial class StarterForm : Form
     {
@@ -19,6 +21,10 @@ namespace Starter
         {
             this.InitializeComponent();
             this.InitializeDatabaseConnection();
+
+            //var conn = new CherryContext();
+            //var test = conn.Characters.Count();
+
         }
 
         private void InitializeDatabaseConnection()
@@ -50,6 +56,13 @@ namespace Starter
         private void exitButton_Click(object sender, EventArgs e)
         {
             Environment.Exit(1);
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {         
+            this.Visible = false;
+            var gameField = new frmGameField();
+            gameField.Show();
         }
     }
 }

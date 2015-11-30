@@ -14,5 +14,7 @@
         }
 
         public virtual IDbSet<Player> Characters { get; set; }
+        public virtual IDbSet<Path> Paths { get; set; }
+        public virtual IDbSet<Point> Points { get; set; }
     }
 }

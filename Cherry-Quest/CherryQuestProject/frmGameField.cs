@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace CherryQuestProject
 {
-    public partial class Form1 : Form
+    public partial class frmGameField : Form
     {
-        public Form1()
+        public frmGameField()
         {
             InitializeComponent();
+        }
+
+        private void exiButton_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(1);
         }
     }
 }
