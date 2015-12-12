@@ -1,9 +1,11 @@
-﻿namespace TW.Characters
+﻿namespace CherryQuest.Models.Characters
 {
+    using Models;
+
     public class Warlock : Character
     {
-        public Warlock(int id, string name, Position position, int attack, int defence, CharacterLevel level, int gold) 
-            : base(id, name, position, attack, defence, level, gold)
+        public Warlock(string name, Position position, int attack, int defence, CharacterLevel level, int gold) 
+            : base(name, position, attack, defence, level, gold)
         {
 
         }

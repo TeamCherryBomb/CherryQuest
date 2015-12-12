@@ -1,5 +1,6 @@
-﻿namespace TW.Monsters
+﻿namespace CherryQuest.Models.Monsters
 {
+    using Models;
     using Enums;
 
     public class Elf : Monster
@@ -8,8 +9,8 @@
         private const int ElfAttack = 30;
         private const int ElfDefence = 10;
 
-        public Elf(int id, string name, Position position, bool isAlive)
-            : base(id, name, position, ElfHealth, ElfAttack, ElfDefence, isAlive, MonsterType.Holy)
+        public Elf(string name, Position position, bool isAlive)
+            : base(name, position, ElfHealth, ElfAttack, ElfDefence, isAlive)
         {
         }
     }

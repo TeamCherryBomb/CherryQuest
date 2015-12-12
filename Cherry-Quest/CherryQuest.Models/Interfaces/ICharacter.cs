@@ -1,6 +1,7 @@
-﻿namespace TW.Interfaces
+﻿namespace CherryQuest.Models.Interfaces
 {
     using System.Collections.Generic;
+    using Models;
     using Characters;
     using Monsters;
 

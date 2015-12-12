@@ -1,6 +1,6 @@
-﻿namespace TW.Monsters
+﻿namespace CherryQuest.Models.Monsters
 {
-    using System;
+    using Models;
     using Enums;
 
     public class Goblin : Monster
@@ -9,8 +9,8 @@
         private const int GoblinAttack = 10;
         private const int GoblinDefence = 7;
 
-        public Goblin(int id, string name, Position position, bool isAlive)
-            : base(id, name, position, GoblinHealth, GoblinAttack, GoblinDefence, isAlive, MonsterType.Warrior)
+        public Goblin(string name, Position position, bool isAlive)
+            : base(name, position, GoblinHealth, GoblinAttack, GoblinDefence, isAlive)
         {
         }
     }

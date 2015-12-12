@@ -1,6 +1,6 @@
-﻿namespace TW.Monsters
+﻿namespace CherryQuest.Models.Monsters
 {
-    using Enums;
+    using Models;
 
     public class BlackDragon : Monster
     {
@@ -8,8 +8,8 @@
         private const int BlackAttack = 50;
         private const int BlackDefence = 50;
 
-        public BlackDragon(int id, string name, Position position, bool isAlive)
-            : base(id, name, position, BlackHealth, BlackAttack, BlackDefence, isAlive, MonsterType.Dragon)
+        public BlackDragon(string name, Position position, bool isAlive)
+            : base(name, position, BlackHealth, BlackAttack, BlackDefence, isAlive)
         {
         }
     }

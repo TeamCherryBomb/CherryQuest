@@ -1,6 +1,6 @@
-﻿namespace TW.Monsters
+﻿namespace CherryQuest.Models.Monsters
 {
-    using Enums;
+    using Models;
 
     public class AzureDragon : Monster
     {
@@ -9,7 +9,7 @@
         private const int AzureDefence = 40;
 
         public AzureDragon(string name, Position position, bool isAlive)
-            : base(name, position, AzureHealth, AzureAttack, AzureDefence, isAlive, MonsterType.Dragon)
+            : base(name, position, AzureHealth, AzureAttack, AzureDefence, isAlive)
         {
         }
     }

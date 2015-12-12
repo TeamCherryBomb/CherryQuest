@@ -1,4 +1,4 @@
-﻿namespace TW.Interfaces
+﻿namespace CherryQuest.Models.Interfaces
 {
     public interface IMonster
     {

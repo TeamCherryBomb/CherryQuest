@@ -1,5 +1,6 @@
-﻿namespace TW.Monsters
+﻿namespace CherryQuest.Models.Monsters
 {
+    using Models;
     using Enums;
 
     public class Naga : Monster
@@ -8,8 +9,8 @@
         private const int NagaAttack = 40;
         private const int NagaDefence = 30;
 
-        public Naga(int id, string name, Position position, bool isAlive)
-            : base(id, name, position, NagaHealth, NagaAttack, NagaDefence, isAlive, MonsterType.Warrior)
+        public Naga(string name, Position position, bool isAlive)
+            : base(name, position, NagaHealth, NagaAttack, NagaDefence, isAlive)
         {
         }
     }

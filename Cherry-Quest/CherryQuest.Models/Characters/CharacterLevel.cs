@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CherryQuest.Models.Characters
+﻿namespace CherryQuest.Models.Characters
 {
-    class CharacterLevel
+    public class CharacterLevel
     {
+        public int Experience { get; set; }
+
+        public int Value { get; set; }
     }
 }

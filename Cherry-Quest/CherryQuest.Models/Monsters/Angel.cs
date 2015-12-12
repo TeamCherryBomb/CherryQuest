@@ -1,7 +1,7 @@
-﻿namespace TW.Monsters
+﻿namespace CherryQuest.Models.Monsters
 {
+    using Models;
     using Enums;
-    using Interfaces;
 
     public class Angel : Monster
     {
@@ -9,8 +9,8 @@
         private const int AngelAttack = 50;
         private const int AngelDefence = 50;
 
-        public Angel(int id, string name, Position position, bool isAlive)
-            : base(id, name, position, AngelHealth, AngelAttack, AngelDefence, isAlive, MonsterType.Holy)
+        public Angel(string name, Position position, bool isAlive)
+            : base(name, position, AngelHealth, AngelAttack, AngelDefence, isAlive)
         {
         }
 

@@ -46,18 +46,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Characters\Barbarian.cs" />
+    <Compile Include="Characters\Character.cs" />
+    <Compile Include="Characters\CharacterLevel.cs" />
+    <Compile Include="Characters\Cleric.cs" />
+    <Compile Include="Characters\Ranger.cs" />
+    <Compile Include="Characters\Warlock.cs" />
     <Compile Include="Enums\MonsterType.cs" />
-    <Compile Include="Monster.cs" />
-    <Compile Include="Path.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="GameObject.cs" />
+    <Compile Include="Interfaces\ICharacter.cs" />
+    <Compile Include="Interfaces\IMonster.cs" />
+    <Compile Include="Monsters\Angel.cs" />
+    <Compile Include="Monsters\AzureDragon.cs" />
+    <Compile Include="Monsters\Basilisk.cs" />
+    <Compile Include="Monsters\Behemoth.cs" />
+    <Compile Include="Monsters\BlackDragon.cs" />
+    <Compile Include="Monsters\Efreet.cs" />
+    <Compile Include="Monsters\Elf.cs" />
+    <Compile Include="Monsters\Goblin.cs" />
+    <Compile Include="Monsters\Lich.cs" />
+    <Compile Include="Monsters\Monster.cs" />
+    <Compile Include="Monsters\Naga.cs" />
     <Compile Include="Enums\PlayerType.cs" />
-    <Compile Include="Point.cs" />
+    <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

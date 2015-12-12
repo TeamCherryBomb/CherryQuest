@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CherryQuest.Models
+﻿namespace CherryQuest.Models
 {
-    class GameObject
+    public abstract class GameObject
     {
+        protected GameObject(Position position, string name)
+        {
+            this.Position = position;
+            this.Name = name;
+        }
+
+        public Position Position { get; set; }
+
+        public string Name { get; set; }
+
     }
 }
