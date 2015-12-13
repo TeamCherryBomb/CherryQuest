@@ -1,7 +1,6 @@
 ﻿namespace CherryQuest.Models.Monsters
 {
-    using Models;
-    using Enums;
+    using Microsoft.Xna.Framework.Graphics;
 
     public class Naga : Monster
     {
@@ -9,8 +8,8 @@
         private const int NagaAttack = 40;
         private const int NagaDefence = 30;
 
-        public Naga(string name, Position position, bool isAlive)
-            : base(name, position, NagaHealth, NagaAttack, NagaDefence, isAlive)
+        public Naga(Texture2D texture, int rows, int cols)
+            : base(NagaHealth, NagaAttack, NagaDefence, texture, rows, cols)
         {
         }
     }

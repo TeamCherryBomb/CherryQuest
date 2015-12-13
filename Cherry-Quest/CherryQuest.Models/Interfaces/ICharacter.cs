@@ -1,16 +1,11 @@
 ﻿namespace CherryQuest.Models.Interfaces
 {
     using System.Collections.Generic;
-    using Models;
     using Characters;
     using Monsters;
 
-    public interface ICharacter
+    public interface ICharacter : IMovable
     {
-        string Name { get; set; }
-
-        Position Position { get; set; }
-
         int Attack { get; set; }
 
         int Defence { get; set; }
@@ -19,6 +14,6 @@
 
         int Gold { get; set; }
 
-        ICollection<Monster> Monsters { get; set; }
+        IEnumerable<Monster> Monsters { get; }
     }
 }

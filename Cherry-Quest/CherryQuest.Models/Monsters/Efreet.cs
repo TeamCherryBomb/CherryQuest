@@ -1,7 +1,6 @@
 ﻿namespace CherryQuest.Models.Monsters
 {
-    using Models;
-    using Enums;
+    using Microsoft.Xna.Framework.Graphics;
 
     public class Efreet : Monster
     {
@@ -9,8 +8,8 @@
         private const int EfreetAttack = 45;
         private const int EfreetDefence = 25;
 
-        public Efreet(string name, Position position, bool isAlive)
-            : base(name, position, EfreetHealth, EfreetAttack, EfreetDefence, isAlive)
+        public Efreet(Texture2D texture, int rows, int cols)
+            : base(EfreetHealth, EfreetAttack, EfreetDefence, texture, rows, cols)
         {
         }
     }

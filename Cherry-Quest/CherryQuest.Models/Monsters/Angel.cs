@@ -1,7 +1,6 @@
 ﻿namespace CherryQuest.Models.Monsters
 {
-    using Models;
-    using Enums;
+    using Microsoft.Xna.Framework.Graphics;
 
     public class Angel : Monster
     {
@@ -9,10 +8,9 @@
         private const int AngelAttack = 50;
         private const int AngelDefence = 50;
 
-        public Angel(string name, Position position, bool isAlive)
-            : base(name, position, AngelHealth, AngelAttack, AngelDefence, isAlive)
+        public Angel(Texture2D texture, int rows, int cols)
+            : base(AngelHealth, AngelAttack, AngelDefence, texture, rows, cols)
         {
         }
-
     }
 }

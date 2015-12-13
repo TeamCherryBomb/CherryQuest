@@ -1,6 +1,6 @@
 ﻿namespace CherryQuest.Models.Monsters
 {
-    using Models;
+    using Microsoft.Xna.Framework.Graphics;
 
     public class AzureDragon : Monster
     {
@@ -8,8 +8,8 @@
         private const int AzureAttack = 60;
         private const int AzureDefence = 40;
 
-        public AzureDragon(string name, Position position, bool isAlive)
-            : base(name, position, AzureHealth, AzureAttack, AzureDefence, isAlive)
+        public AzureDragon(Texture2D texture, int rows, int cols)
+            : base(AzureHealth, AzureAttack, AzureDefence, texture, rows, cols)
         {
         }
     }

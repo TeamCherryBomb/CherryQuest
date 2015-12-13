@@ -2,14 +2,15 @@
 {
     using System.Collections.Generic;
     using Interfaces;
+    using Microsoft.Xna.Framework.Graphics;
     using Monsters;
 
-    public abstract class Character : GameObject, ICharacter
+    public abstract class Character : DrawableGameObject, ICharacter
     {
-        private ICollection<Monster> monsters;
+        private readonly IEnumerable<Monster> monsters;
 
-        protected Character(string name, Position position, int attack, int defence, CharacterLevel level, int gold)
-            : base(position, name)
+        protected Character(int attack, int defence, CharacterLevel level, int gold, Texture2D texture, int rows, int cols)
+            : base(texture, rows, cols)
         {
             this.Attack = attack;
             this.Defence = defence;
@@ -26,10 +27,14 @@
 
         public int Gold { get; set; } // cherries
 
-        public virtual ICollection<Monster> Monsters
+        public virtual IEnumerable<Monster> Monsters
         {
             get { return this.monsters; }
-            set { this.monsters = value; }
+        }
+
+        public void Move()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

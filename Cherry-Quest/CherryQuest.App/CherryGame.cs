@@ -1,18 +1,22 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-namespace CherryQuest.App
+﻿namespace CherryQuest.App
 {
+    using System;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+    using Models.Characters;
+    using Models.Interfaces;
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class CherryGame : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private IDrawableGameObject character;
 
-        public Game1()
+        public CherryGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -40,7 +44,8 @@ namespace CherryQuest.App
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            var texture = Content.Load<Texture2D>("sheet");
+            character = new Barbarian(5, 5, new CharacterLevel(), 1, texture, 4, 6);
         }
 
         /// <summary>
@@ -59,11 +64,10 @@ namespace CherryQuest.App
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
+            character.Update();
             base.Update(gameTime);
         }
 
@@ -75,7 +79,7 @@ namespace CherryQuest.App
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            character.Draw(this.spriteBatch, new Vector2(400, 200));
 
             base.Draw(gameTime);
         }

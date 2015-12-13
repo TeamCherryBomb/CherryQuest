@@ -1,7 +1,6 @@
 ﻿namespace CherryQuest.Models.Monsters
 {
-    using Models;
-    using Enums;
+    using Microsoft.Xna.Framework.Graphics;
 
     public class Lich : Monster
     {
@@ -9,8 +8,8 @@
         private const int LichAttack = 25;
         private const int LichDefence = 15;
 
-        public Lich(string name, Position position, bool isAlive)
-            : base(name, position, LichHealth, LichAttack, LichDefence, isAlive)
+        public Lich(Texture2D texture, int rows, int cols)
+            : base(LichHealth, LichAttack, LichDefence, texture, rows, cols)
         {
         }
     }

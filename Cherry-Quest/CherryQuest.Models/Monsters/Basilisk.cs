@@ -1,7 +1,6 @@
 ﻿namespace CherryQuest.Models.Monsters
 {
-    using Models;
-    using Enums;
+    using Microsoft.Xna.Framework.Graphics;
 
     public class Basilisk : Monster
     {
@@ -9,10 +8,9 @@
         private const int BasiliskAttack = 25;
         private const int BasiliskDefence = 25;
 
-        public Basilisk(string name, Position position, bool isAlive)
-            : base(name, position, BasiliskHealth, BasiliskAttack, BasiliskDefence, isAlive)
+        public Basilisk(Texture2D texture, int rows, int cols)
+            : base(BasiliskHealth, BasiliskAttack, BasiliskDefence, texture, rows, cols)
         {
-
         }
     }
 }

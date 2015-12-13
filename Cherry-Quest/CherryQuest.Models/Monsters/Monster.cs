@@ -2,16 +2,16 @@
 {
     using Models;
     using Interfaces;
+    using Microsoft.Xna.Framework.Graphics;
 
-    public abstract class Monster : GameObject, IMonster
+    public abstract class Monster : DrawableGameObject, IMonster
     {
-        protected Monster(string name, Position position, int health, int attack, int defence, bool isAlive) 
-            : base(position, name)
+        protected Monster( int health, int attack, int defence, Texture2D texture, int rows, int cols) 
+            : base(texture, rows, cols)
         { 
             this.Health = health;
             this.Attack = attack;
             this.Defence = defence;
-            this.IsAlive = isAlive;
         }
 
         public int Health { get; set; } 
@@ -19,8 +19,5 @@
         public int Attack { get; set; }
 
         public int Defence { get; set; }
-
-        public bool IsAlive { get; set; }
-
     }
 }
