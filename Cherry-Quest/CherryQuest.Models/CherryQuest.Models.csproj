@@ -52,6 +52,7 @@
     <Compile Include="Enums\MonsterType.cs" />
     <Compile Include="DrawableGameObject.cs" />
     <Compile Include="Exceptions\ExperienceException.cs" />
+    <Compile Include="Exceptions\UnknownCharacterClassException.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
     <Compile Include="Interfaces\IDrawableGameObject.cs" />
     <Compile Include="Interfaces\IMonster.cs" />

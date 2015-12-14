@@ -33,10 +33,5 @@
         {
             get { return this.monsters; }
         }
-
-        public void Move()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

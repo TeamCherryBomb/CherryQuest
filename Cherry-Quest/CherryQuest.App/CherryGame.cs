@@ -1,6 +1,7 @@
 ﻿namespace CherryQuest.App
 {
     using System;
+    using Factories;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
@@ -45,7 +46,7 @@
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             var texture = Content.Load<Texture2D>("sheet");
-            character = new Barbarian(texture, 4, 6);
+            character = ICharacterFactory.Create("Barbarian", texture, 4, 6);
         }
 
         /// <summary>
