@@ -45,7 +45,7 @@
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             var texture = Content.Load<Texture2D>("sheet");
-            character = new Barbarian(5, 5, new CharacterLevel(), 1, texture, 4, 6);
+            character = new Barbarian(texture, 4, 6);
         }
 
         /// <summary>

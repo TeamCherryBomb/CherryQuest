@@ -4,8 +4,11 @@
 
     public class Ranger : Character
     {
-        public Ranger(int attack, int defence, CharacterLevel level, int gold, Texture2D texture, int rows, int cols) 
-            : base(attack, defence, level, gold, texture, rows, cols)
+        private const int RangerAttack = 8;
+        private const int RangerDefense = 4;
+
+        public Ranger(Texture2D texture, int rows, int cols)
+            : base(RangerAttack, RangerDefense, texture, rows, cols)
         {
         }
     }

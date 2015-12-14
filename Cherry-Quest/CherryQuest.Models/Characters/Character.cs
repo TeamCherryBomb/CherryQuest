@@ -7,15 +7,17 @@
 
     public abstract class Character : DrawableGameObject, ICharacter
     {
+        private const int DefaultStartingGold = 0;
+
         private readonly IEnumerable<Monster> monsters;
 
-        protected Character(int attack, int defence, CharacterLevel level, int gold, Texture2D texture, int rows, int cols)
+        protected Character(int attack, int defence, Texture2D texture, int rows, int cols)
             : base(texture, rows, cols)
         {
             this.Attack = attack;
             this.Defence = defence;
-            this.Level = level;
-            this.Gold = gold;
+            this.Level = new CharacterLevel();
+            this.Gold = DefaultStartingGold;
             this.monsters = new HashSet<Monster>();
         }
 

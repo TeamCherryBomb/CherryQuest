@@ -4,8 +4,11 @@
 
     public class Cleric : Character
     {
-        public Cleric(int attack, int defence, CharacterLevel level, int gold, Texture2D texture, int rows, int cols) 
-            : base(attack, defence, level, gold, texture, rows, cols)
+        private const int ClericAttack = 4;
+        private const int ClericDefense = 8;
+
+        public Cleric(Texture2D texture, int rows, int cols) 
+            : base(ClericAttack, ClericDefense, texture, rows, cols)
         {
         }
     }

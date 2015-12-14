@@ -4,8 +4,11 @@
 
     public class Warlock : Character
     {
-        public Warlock(int attack, int defence, CharacterLevel level, int gold, Texture2D texture, int rows, int cols) 
-            : base(attack, defence, level, gold, texture, rows, cols)
+        private const int WarlockAttack = 9;
+        private const int WarlockDefense = 3;
+
+        public Warlock(Texture2D texture, int rows, int cols) 
+            : base(WarlockAttack, WarlockDefense, texture, rows, cols)
         {
         }
     }
