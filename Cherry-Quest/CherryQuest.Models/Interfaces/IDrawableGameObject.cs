@@ -1,5 +1,6 @@
 ﻿namespace CherryQuest.Models.Interfaces
 {
+    using Enums;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
@@ -13,7 +14,7 @@
 
         void Update();
 
-        void Draw(SpriteBatch spriteBatch, Vector2 location);
+        void Draw(SpriteBatch spriteBatch, Vector2 location, ObjectState state);
 
         void Draw(SpriteBatch spriteBatch);
     }

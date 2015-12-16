@@ -1,5 +1,6 @@
 ﻿namespace CherryQuest.Models.BackgroundObjects
 {
+    using Enums;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
@@ -18,7 +19,7 @@
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            this.Draw(spriteBatch, new Vector2(0, 0));
+            this.Draw(spriteBatch, new Vector2(0, 0), ObjectState.Idle);
         }
     }
 }

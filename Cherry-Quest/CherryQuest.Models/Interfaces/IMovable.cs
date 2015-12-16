@@ -1,7 +1,9 @@
 ﻿namespace CherryQuest.Models.Interfaces
 {
+    using Enums;
+
     public interface IMovable
     {
-        void Move();
+        ObjectState ObjectState { get; set; }
     }
 }

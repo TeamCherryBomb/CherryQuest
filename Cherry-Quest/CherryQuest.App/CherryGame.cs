@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Reflection;
     using Factories;
     using Microsoft.Xna.Framework;
@@ -9,6 +10,7 @@
     using Microsoft.Xna.Framework.Input;
     using Models.BackgroundObjects;
     using Models.Characters;
+    using Models.Enums;
     using Models.Interfaces;
 
     /// <summary>
@@ -65,13 +67,13 @@
             this.background = new BackgroundObject(this.Content, this.GraphicsDevice);
 
             IDrawableGameObject barberian = CharacterFactory.Create("Barbarian", this.Content, 200, 50);
-            IDrawableGameObject cleric = CharacterFactory.Create("Cleric", this.Content, 200, 200);
-            IDrawableGameObject ranger = CharacterFactory.Create("Ranger", this.Content, 400, 200);
+            //IDrawableGameObject cleric = CharacterFactory.Create("Cleric", this.Content, 200, 200);
+            //IDrawableGameObject ranger = CharacterFactory.Create("Ranger", this.Content, 400, 200);
 
 
             this.gameObjects.Add(barberian);
-            this.gameObjects.Add(cleric);
-            this.gameObjects.Add(ranger);
+            //this.gameObjects.Add(cleric);
+            //this.gameObjects.Add(ranger);
         }
 
         /// <summary>
@@ -93,16 +95,28 @@
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
-
+            
             foreach (var drawableGameObject in this.gameObjects)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.D))
+                if (Keyboard.GetState().GetPressedKeys().Any())
                 {
-                    if (typeof (Barbarian) == drawableGameObject.GetType())
+                    if (typeof (Barbarian) == drawableGameObject.GetType() && Keyboard.GetState().IsKeyDown(Keys.D))
                     {
-                        ((Character)drawableGameObject).X += 10;
+                        ((Character) drawableGameObject).X += 10;
+                        ((Character) drawableGameObject).ObjectState = ObjectState.Moving;
+                    }
+
+                    if (typeof(Barbarian) == drawableGameObject.GetType() && Keyboard.GetState().IsKeyDown(Keys.A))
+                    {
+                        ((Character)drawableGameObject).X -= 10;
+                        ((Character)drawableGameObject).ObjectState = ObjectState.Moving;
                     }
                 }
+                else
+                {
+                    ((Character)drawableGameObject).ObjectState = ObjectState.Idle;
+                }
+
                 drawableGameObject.Update();
             }
 

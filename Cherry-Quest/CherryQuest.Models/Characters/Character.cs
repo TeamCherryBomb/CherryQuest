@@ -1,6 +1,7 @@
 ﻿namespace CherryQuest.Models.Characters
 {
     using System.Collections.Generic;
+    using Enums;
     using Interfaces;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
@@ -15,6 +16,7 @@
         protected Character(int attack, int defence, int rows, int cols)
             : base( rows, cols)
         {
+            this.ObjectState = ObjectState.Moving;
             this.Attack = attack;
             this.Defence = defence;
             this.Level = new CharacterLevel();
@@ -38,5 +40,7 @@
         {
             get { return this.monsters; }
         }
+
+        public ObjectState ObjectState { get; set; }
     }
 }

@@ -4,7 +4,7 @@
     using Characters;
     using Monsters;
 
-    public interface ICharacter : IDrawableGameObject
+    public interface ICharacter : IDrawableGameObject, IMovable
     {
         int Attack { get; set; }
 

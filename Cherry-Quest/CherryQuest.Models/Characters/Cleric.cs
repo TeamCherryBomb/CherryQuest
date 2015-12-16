@@ -25,7 +25,7 @@
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            this.Draw(spriteBatch, new Vector2(this.X, this.Y));
+            this.Draw(spriteBatch, new Vector2(this.X, this.Y), this.ObjectState);
         }
     }
 }
