@@ -1,8 +1,10 @@
 ﻿namespace CherryQuest.Models.Characters
 {
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
     using Enums;
     using Interfaces;
+    using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
     using Monsters;
@@ -31,6 +33,16 @@
         public int Attack { get; set; }
 
         public int Defence { get; set; }
+
+        public Rectangle BoundingBox
+        {
+            get
+            {
+                return new Rectangle(this.X, this.Y, 
+                    this.SpriteWidth / 2, 
+                    this.SpriteHeight / 2);
+            }
+        }
 
         public CharacterLevel Level { get; set; }
 

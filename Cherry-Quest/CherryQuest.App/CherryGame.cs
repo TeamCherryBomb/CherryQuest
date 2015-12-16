@@ -24,7 +24,7 @@
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private List<IDrawableGameObject> gameObjects;
-        private IDrawableGameObject background;
+        private BackgroundObject background;
 
         public CherryGame()
         {
@@ -64,15 +64,15 @@
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
 
-            this.background = new BackgroundObject(this.Content, this.GraphicsDevice);
+            this.background = new BackgroundObject(this.Content);
 
-            IDrawableGameObject barberian = CharacterFactory.Create("Barbarian", this.Content, 200, 50);
-            //IDrawableGameObject cleric = CharacterFactory.Create("Cleric", this.Content, 200, 200);
+            IDrawableGameObject barbarian = CharacterFactory.Create("Barbarian", this.Content, 100, 400);
+            IDrawableGameObject cleric = CharacterFactory.Create("Cleric", this.Content, 500, 400);
             //IDrawableGameObject ranger = CharacterFactory.Create("Ranger", this.Content, 400, 200);
 
 
-            this.gameObjects.Add(barberian);
-            //this.gameObjects.Add(cleric);
+            this.gameObjects.Add(barbarian);
+            this.gameObjects.Add(cleric);
             //this.gameObjects.Add(ranger);
         }
 
@@ -103,18 +103,29 @@
                     if (typeof (Barbarian) == drawableGameObject.GetType() && Keyboard.GetState().IsKeyDown(Keys.D))
                     {
                         ((Character) drawableGameObject).X += 10;
+                        //((Character) drawableGameObject).Rotation += 1f;
                         ((Character) drawableGameObject).ObjectState = ObjectState.Moving;
+                     
                     }
 
                     if (typeof(Barbarian) == drawableGameObject.GetType() && Keyboard.GetState().IsKeyDown(Keys.A))
                     {
                         ((Character)drawableGameObject).X -= 10;
+                        //((Character)drawableGameObject).Rotation -= 1f;
                         ((Character)drawableGameObject).ObjectState = ObjectState.Moving;
                     }
                 }
                 else
                 {
                     ((Character)drawableGameObject).ObjectState = ObjectState.Idle;
+                }
+
+                var barb = this.gameObjects.OfType<Barbarian>().First();
+                var cleric = this.gameObjects.OfType<Cleric>().FirstOrDefault();
+
+                if (cleric != null && barb.BoundingBox.Intersects(cleric.BoundingBox))
+                {
+                    cleric.X += 10;
                 }
 
                 drawableGameObject.Update();

@@ -1,25 +1,25 @@
 ﻿namespace CherryQuest.Models.BackgroundObjects
 {
-    using Enums;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
-    public class BackgroundObject : DrawableGameObject
+    public class BackgroundObject
     {
         private const string Image = "bg1";
-        private readonly Rectangle mainFrame;
+        private readonly Texture2D texture;
 
-        public BackgroundObject(ContentManager content, GraphicsDevice device) 
-            : base(1, 1)
+        public BackgroundObject(ContentManager content) 
         {
-            this.Texture = content.Load<Texture2D>(Image);
-            mainFrame = new Rectangle(0, 0, device.Viewport.Width, device.Viewport.Height);
+            this.texture = content.Load<Texture2D>(Image);
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            this.Draw(spriteBatch, new Vector2(0, 0), ObjectState.Idle);
+            spriteBatch.Begin();
+            spriteBatch.Draw(this.texture, new Vector2(0, 0), null,
+        Color.White, 0f, Vector2.Zero, 1.65f, SpriteEffects.None, 0f);
+            spriteBatch.End();
         }
     }
 }

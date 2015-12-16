@@ -17,6 +17,7 @@
             this.Columns = cols;
             this.currentFrame = 0;
             this.totalFrames = this.Rows * this.Columns;
+            this.Rotation = 0f;
         }
 
         public Texture2D Texture { get; set; }
@@ -24,6 +25,12 @@
         public int Rows { get; }
 
         public int Columns { get; }
+
+        public float Rotation { get; set; }
+
+        protected int SpriteWidth { get; set; }
+
+        protected int SpriteHeight { get; set; }
 
         public void Update()
         {
@@ -35,26 +42,26 @@
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, ObjectState state)
         {
-            int width = this.Texture.Width / this.Columns;
-            int height = this.Texture.Height / this.Rows;
-            
+            this.SpriteWidth = this.Texture.Width / this.Columns;
+            this.SpriteHeight = this.Texture.Height / this.Rows;
 
             if (state == ObjectState.Moving)
             {
                 int row = (int)((float)this.currentFrame / this.Columns);
                 int column = this.currentFrame % this.Columns;
 
-                var sourceRectangle = new Rectangle(width * column, height * row, width, height);
-                var destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
+                var sourceRectangle = new Rectangle(this.SpriteWidth * column, this.SpriteHeight * row, this.SpriteWidth, this.SpriteHeight);
+                var destinationRectangle = new Rectangle((int)location.X, (int)location.Y, this.SpriteWidth, this.SpriteHeight);
 
                 spriteBatch.Begin();
                 spriteBatch.Draw(this.Texture, destinationRectangle, sourceRectangle, Color.White);
+                //spriteBatch.Draw(this.Texture, destinationRectangle, sourceRectangle, Color.White, this.Rotation, new Vector2(0, 0), SpriteEffects.None, 0f);
                 spriteBatch.End();
             }
             else
             {
-                var sourceRectangle = new Rectangle(0, 0, width, height);
-                var destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
+                var sourceRectangle = new Rectangle(0, 0, this.SpriteWidth, this.SpriteHeight);
+                var destinationRectangle = new Rectangle((int)location.X, (int)location.Y, this.SpriteWidth, this.SpriteHeight);
 
                 spriteBatch.Begin();
                 spriteBatch.Draw(this.Texture, destinationRectangle, sourceRectangle, Color.White);
