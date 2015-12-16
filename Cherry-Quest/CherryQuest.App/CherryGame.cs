@@ -41,6 +41,10 @@
             graphics.PreferredBackBufferHeight = CanvasHeight;
             graphics.PreferredBackBufferWidth = CanvasWidth;
             graphics.ApplyChanges();
+
+            var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
+            form.Location = new System.Drawing.Point(100, 100);
+
             base.Initialize();
         }
 
