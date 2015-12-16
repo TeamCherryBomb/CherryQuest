@@ -18,7 +18,7 @@
         {
             spriteBatch.Begin();
             spriteBatch.Draw(this.texture, new Vector2(0, 0), null,
-        Color.White, 0f, Vector2.Zero, 1.65f, SpriteEffects.None, 0f);
+                Color.White, 0f, Vector2.Zero, 1.65f, SpriteEffects.None, 0f);
             spriteBatch.End();
         }
     }

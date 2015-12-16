@@ -103,7 +103,7 @@
                     if (typeof (Barbarian) == drawableGameObject.GetType() && Keyboard.GetState().IsKeyDown(Keys.D))
                     {
                         ((Character) drawableGameObject).X += 10;
-                        //((Character) drawableGameObject).Rotation += 1f;
+                        ((Character) drawableGameObject).Effects = SpriteEffects.None;
                         ((Character) drawableGameObject).ObjectState = ObjectState.Moving;
                      
                     }
@@ -111,7 +111,7 @@
                     if (typeof(Barbarian) == drawableGameObject.GetType() && Keyboard.GetState().IsKeyDown(Keys.A))
                     {
                         ((Character)drawableGameObject).X -= 10;
-                        //((Character)drawableGameObject).Rotation -= 1f;
+                        ((Character)drawableGameObject).Effects = SpriteEffects.FlipHorizontally;
                         ((Character)drawableGameObject).ObjectState = ObjectState.Moving;
                     }
                 }

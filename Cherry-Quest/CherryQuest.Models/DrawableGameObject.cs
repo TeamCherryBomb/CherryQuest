@@ -18,6 +18,7 @@
             this.currentFrame = 0;
             this.totalFrames = this.Rows * this.Columns;
             this.Rotation = 0f;
+            this.Effects = SpriteEffects.None;
         }
 
         public Texture2D Texture { get; set; }
@@ -31,6 +32,8 @@
         protected int SpriteWidth { get; set; }
 
         protected int SpriteHeight { get; set; }
+
+        public SpriteEffects Effects { get; set; }
 
         public void Update()
         {
@@ -54,8 +57,7 @@
                 var destinationRectangle = new Rectangle((int)location.X, (int)location.Y, this.SpriteWidth, this.SpriteHeight);
 
                 spriteBatch.Begin();
-                spriteBatch.Draw(this.Texture, destinationRectangle, sourceRectangle, Color.White);
-                //spriteBatch.Draw(this.Texture, destinationRectangle, sourceRectangle, Color.White, this.Rotation, new Vector2(0, 0), SpriteEffects.None, 0f);
+                spriteBatch.Draw(this.Texture, destinationRectangle, sourceRectangle, Color.White, this.Rotation, new Vector2(0, 0), this.Effects, 0f);
                 spriteBatch.End();
             }
             else
@@ -64,7 +66,7 @@
                 var destinationRectangle = new Rectangle((int)location.X, (int)location.Y, this.SpriteWidth, this.SpriteHeight);
 
                 spriteBatch.Begin();
-                spriteBatch.Draw(this.Texture, destinationRectangle, sourceRectangle, Color.White);
+                spriteBatch.Draw(this.Texture, destinationRectangle, sourceRectangle, Color.White, this.Rotation, new Vector2(0, 0), this.Effects, 0f);
                 spriteBatch.End();
             }
             
