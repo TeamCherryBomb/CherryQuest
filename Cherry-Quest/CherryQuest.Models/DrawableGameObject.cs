@@ -10,7 +10,7 @@
         private int currentFrame;
         private readonly int totalFrames;
 
-        protected DrawableGameObject( int rows, int cols)
+        protected DrawableGameObject(int rows, int cols)
         {
             this.Rows = rows;
             this.Columns = cols;

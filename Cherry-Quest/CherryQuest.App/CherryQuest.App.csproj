@@ -43,7 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CherryGame.cs" />
-    <Compile Include="Factories\ICharacterFactory.cs" />
+    <Compile Include="Factories\CharacterFactory.cs" />
     <Compile Include="GameMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

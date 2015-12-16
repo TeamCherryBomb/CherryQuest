@@ -12,7 +12,7 @@
     {
         private const string RequiredAssemblyName = "CherryQuest.Models";
 
-        public static ICharacter Create(string characterClassName, ContentManager content, int rows, int cols)
+        public static ICharacter Create(string characterClassName, ContentManager content, int x, int y)
         {
             var currentAssembly = Assembly.Load(RequiredAssemblyName);
             var currentType = currentAssembly.GetTypes().FirstOrDefault(t => t.Name == characterClassName);
@@ -22,7 +22,7 @@
                 throw new UnknownCharacterClassException();
             }
 
-            return (ICharacter)Activator.CreateInstance(currentType, content, rows, cols);
+            return (ICharacter)Activator.CreateInstance(currentType, content, x, y);
         }
     }
 }

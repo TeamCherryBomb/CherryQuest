@@ -18,12 +18,15 @@
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private List<IDrawableGameObject> gameObjects;
+        private const int CanvasHeight = 820;
+        private const int CanvasWidth = 1680;
 
         public CherryGame()
         {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-            gameObjects = new List<IDrawableGameObject>();
+            this.graphics = new GraphicsDeviceManager(this);
+          
+            this.Content.RootDirectory = "Content";
+            this.gameObjects = new List<IDrawableGameObject>();
         }
 
         /// <summary>
@@ -35,7 +38,9 @@
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            graphics.PreferredBackBufferHeight = CanvasHeight;
+            graphics.PreferredBackBufferWidth = CanvasWidth;
+            graphics.ApplyChanges();
             base.Initialize();
         }
 
@@ -46,13 +51,13 @@
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
 
-            IDrawableGameObject barberian = CharacterFactory.Create("Barbarian", this.Content, 4, 6);
-            IDrawableGameObject cleric = CharacterFactory.Create("Cleric", this.Content, 2, 5);
+            IDrawableGameObject barberian = CharacterFactory.Create("Barbarian", this.Content, 200, 50);
+            IDrawableGameObject cleric = CharacterFactory.Create("Cleric", this.Content, 200, 200);
 
-            gameObjects.Add(barberian);
-            gameObjects.Add(cleric);
+            this.gameObjects.Add(barberian);
+            this.gameObjects.Add(cleric);
         }
 
         /// <summary>
@@ -72,9 +77,9 @@
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+                this.Exit();
 
-            foreach (var drawableGameObject in gameObjects)
+            foreach (var drawableGameObject in this.gameObjects)
             {
                 drawableGameObject.Update();
             }
@@ -88,11 +93,11 @@
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            this.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            foreach (var drawableGameObject in gameObjects)
+            foreach (var drawableGameObject in this.gameObjects)
             {
-                drawableGameObject.Draw(spriteBatch);
+                drawableGameObject.Draw(this.spriteBatch);
             }
             
 
