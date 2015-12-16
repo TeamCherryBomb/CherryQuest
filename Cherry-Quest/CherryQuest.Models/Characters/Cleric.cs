@@ -8,22 +8,20 @@
     {
         private const int ClericAttack = 4;
         private const int ClericDefense = 8;
-        private const string image = "test";
-        private const int rowsSplit = 2;
-        private const int colsSplit = 5;
+        private const string Image = "test";
+        private const int RowsSplit = 2;
+        private const int ColsSplit = 5;
 
         //TODO Context
         public Cleric(ContentManager content, int x, int y) 
-            : base(ClericAttack, ClericDefense, rowsSplit, colsSplit)
+            : base(ClericAttack, ClericDefense, RowsSplit, ColsSplit)
         {
-            this.Texture = content.Load<Texture2D>(image);
+            this.Texture = content.Load<Texture2D>(Image);
+
+            //TODO validations
             this.X = x;
             this.Y = y;
         }
-
-        public int X { get; set; }
-
-        public int Y { get; set; }
 
         public override void Draw(SpriteBatch spriteBatch)
         {

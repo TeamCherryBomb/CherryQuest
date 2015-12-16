@@ -15,16 +15,16 @@
     /// </summary>
     public class CherryGame : Game
     {
+        private const int CanvasHeight = 820;
+        private const int CanvasWidth = 1680;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private List<IDrawableGameObject> gameObjects;
-        private const int CanvasHeight = 820;
-        private const int CanvasWidth = 1680;
 
         public CherryGame()
         {
             this.graphics = new GraphicsDeviceManager(this);
-          
             this.Content.RootDirectory = "Content";
             this.gameObjects = new List<IDrawableGameObject>();
         }
@@ -37,13 +37,12 @@
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            graphics.PreferredBackBufferHeight = CanvasHeight;
-            graphics.PreferredBackBufferWidth = CanvasWidth;
-            graphics.ApplyChanges();
+            this.graphics.PreferredBackBufferHeight = CanvasHeight;
+            this.graphics.PreferredBackBufferWidth = CanvasWidth;
+            this.graphics.ApplyChanges();
 
-            var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
-            form.Location = new System.Drawing.Point(100, 100);
+            var drawOnScreen = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
+            drawOnScreen.Location = new System.Drawing.Point(100, 100);
 
             base.Initialize();
         }
@@ -83,11 +82,19 @@
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
+
             foreach (var drawableGameObject in this.gameObjects)
             {
+                if (Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    if (typeof (Barbarian) == drawableGameObject.GetType())
+                    {
+                        ((Character)drawableGameObject).X += 10;
+                    }
+                }
                 drawableGameObject.Update();
             }
-            
+
             base.Update(gameTime);
         }
 
@@ -103,7 +110,6 @@
             {
                 drawableGameObject.Draw(this.spriteBatch);
             }
-            
 
             base.Draw(gameTime);
         }
