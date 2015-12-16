@@ -8,9 +8,15 @@
         private const int GoblinAttack = 10;
         private const int GoblinDefence = 7;
 
+        //TODO Content
         public Goblin(Texture2D texture, int rows, int cols)
-            : base(GoblinHealth, GoblinAttack, GoblinDefence, texture, rows, cols)
+            : base(GoblinHealth, GoblinAttack, GoblinDefence, rows, cols)
         {
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

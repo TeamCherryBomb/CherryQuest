@@ -2,6 +2,7 @@
 {
     using Interfaces;
     using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
     public abstract class DrawableGameObject : IDrawableGameObject
@@ -9,16 +10,15 @@
         private int currentFrame;
         private readonly int totalFrames;
 
-        protected DrawableGameObject(Texture2D texture, int rows, int cols)
+        protected DrawableGameObject( int rows, int cols)
         {
-            this.Texture = texture;
             this.Rows = rows;
             this.Columns = cols;
             this.currentFrame = 0;
             this.totalFrames = this.Rows * this.Columns;
         }
 
-        public Texture2D Texture { get; }
+        public Texture2D Texture { get; set; }
 
         public int Rows { get; }
 
@@ -28,6 +28,8 @@
         {
             this.currentFrame = (this.currentFrame + 1) % this.totalFrames;
         }
+
+        public abstract void Draw(SpriteBatch spriteBatch);
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {

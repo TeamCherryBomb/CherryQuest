@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Interfaces;
+    using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
     using Monsters;
 
@@ -11,8 +12,8 @@
 
         private readonly IEnumerable<Monster> monsters;
 
-        protected Character(int attack, int defence, Texture2D texture, int rows, int cols)
-            : base(texture, rows, cols)
+        protected Character(int attack, int defence, int rows, int cols)
+            : base( rows, cols)
         {
             this.Attack = attack;
             this.Defence = defence;

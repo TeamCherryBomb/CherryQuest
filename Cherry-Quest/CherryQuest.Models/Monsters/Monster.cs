@@ -6,8 +6,8 @@
 
     public abstract class Monster : DrawableGameObject, IMonster
     {
-        protected Monster( int health, int attack, int defence, Texture2D texture, int rows, int cols) 
-            : base(texture, rows, cols)
+        protected Monster( int health, int attack, int defence, int rows, int cols) 
+            : base(rows, cols)
         { 
             this.Health = health;
             this.Attack = attack;

@@ -8,9 +8,15 @@
         private const int LichAttack = 25;
         private const int LichDefence = 15;
 
+        //TODO Content
         public Lich(Texture2D texture, int rows, int cols)
-            : base(LichHealth, LichAttack, LichDefence, texture, rows, cols)
+            : base(LichHealth, LichAttack, LichDefence, rows, cols)
         {
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -9,8 +9,14 @@
         private const int BasiliskDefence = 25;
 
         public Basilisk(Texture2D texture, int rows, int cols)
-            : base(BasiliskHealth, BasiliskAttack, BasiliskDefence, texture, rows, cols)
+            : base(BasiliskHealth, BasiliskAttack, BasiliskDefence, rows, cols)
         {
+        }
+
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -8,9 +8,15 @@
         private const int BehemothAttack = 40;
         private const int BehemothDefence = 30;
 
+        //TODO Content
         public Behemoth(Texture2D texture, int rows, int cols)
-            : base(BehemothHealth, BehemothAttack, BehemothDefence, texture, rows, cols)
+            : base(BehemothHealth, BehemothAttack, BehemothDefence, rows, cols)
         {
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

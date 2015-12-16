@@ -8,9 +8,15 @@
         private const int NagaAttack = 40;
         private const int NagaDefence = 30;
 
+        //TODO Content
         public Naga(Texture2D texture, int rows, int cols)
-            : base(NagaHealth, NagaAttack, NagaDefence, texture, rows, cols)
+            : base(NagaHealth, NagaAttack, NagaDefence, rows, cols)
         {
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

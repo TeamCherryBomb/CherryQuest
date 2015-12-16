@@ -5,7 +5,7 @@
 
     public interface IDrawableGameObject
     {
-        Texture2D Texture { get; }
+        Texture2D Texture { get; set; }
 
         int Rows { get; }
 
@@ -14,5 +14,7 @@
         void Update();
 
         void Draw(SpriteBatch spriteBatch, Vector2 location);
+
+        void Draw(SpriteBatch spriteBatch);
     }
 }

@@ -1,6 +1,8 @@
 ﻿namespace CherryQuest.App
 {
     using System;
+    using System.Collections.Generic;
+    using System.Reflection;
     using Factories;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -15,12 +17,13 @@
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        private IDrawableGameObject character;
+        private List<IDrawableGameObject> gameObjects;
 
         public CherryGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            gameObjects = new List<IDrawableGameObject>();
         }
 
         /// <summary>
@@ -45,8 +48,11 @@
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            var texture = Content.Load<Texture2D>("sheet");
-            character = ICharacterFactory.Create("Barbarian", texture, 4, 6);
+            IDrawableGameObject barberian = CharacterFactory.Create("Barbarian", this.Content, 4, 6);
+            IDrawableGameObject cleric = CharacterFactory.Create("Cleric", this.Content, 2, 5);
+
+            gameObjects.Add(barberian);
+            gameObjects.Add(cleric);
         }
 
         /// <summary>
@@ -68,7 +74,11 @@
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            character.Update();
+            foreach (var drawableGameObject in gameObjects)
+            {
+                drawableGameObject.Update();
+            }
+            
             base.Update(gameTime);
         }
 
@@ -80,7 +90,11 @@
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            character.Draw(this.spriteBatch, new Vector2(400, 200));
+            foreach (var drawableGameObject in gameObjects)
+            {
+                drawableGameObject.Draw(spriteBatch);
+            }
+            
 
             base.Draw(gameTime);
         }

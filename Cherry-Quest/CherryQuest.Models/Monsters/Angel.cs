@@ -8,9 +8,16 @@
         private const int AngelAttack = 50;
         private const int AngelDefence = 50;
 
-        public Angel(Texture2D texture, int rows, int cols)
-            : base(AngelHealth, AngelAttack, AngelDefence, texture, rows, cols)
+        //TODO Content
+        public Angel(int rows, int cols)
+            : base(AngelHealth, AngelAttack, AngelDefence, rows, cols)
         {
+        }
+
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
