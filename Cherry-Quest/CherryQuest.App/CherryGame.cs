@@ -7,6 +7,7 @@
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
+    using Models.BackgroundObjects;
     using Models.Characters;
     using Models.Interfaces;
 
@@ -21,6 +22,7 @@
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private List<IDrawableGameObject> gameObjects;
+        private IDrawableGameObject background;
 
         public CherryGame()
         {
@@ -37,24 +39,16 @@
         /// </summary>
         protected override void Initialize()
         {
-<<<<<<< HEAD
-            // TODO: Add your initialization logic here
-            this.IsMouseVisible = true;
-
             graphics.PreferredBackBufferHeight = CanvasHeight;
             graphics.PreferredBackBufferWidth = CanvasWidth;
             graphics.ApplyChanges();
+            this.IsMouseVisible = true;
 
             var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
             form.Location = new System.Drawing.Point(0, 0);
-=======
-            this.graphics.PreferredBackBufferHeight = CanvasHeight;
-            this.graphics.PreferredBackBufferWidth = CanvasWidth;
-            this.graphics.ApplyChanges();
 
             var drawOnScreen = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
-            drawOnScreen.Location = new System.Drawing.Point(100, 100);
->>>>>>> d7f4034b02ff273982fb903e49937fc65fa012fe
+            drawOnScreen.Location = new System.Drawing.Point(0, 0);
 
             base.Initialize();
         }
@@ -67,6 +61,8 @@
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
+
+            this.background = new BackgroundObject(this.Content, this.GraphicsDevice);
 
             IDrawableGameObject barberian = CharacterFactory.Create("Barbarian", this.Content, 200, 50);
             IDrawableGameObject cleric = CharacterFactory.Create("Cleric", this.Content, 200, 200);
@@ -120,6 +116,8 @@
         protected override void Draw(GameTime gameTime)
         {
             this.GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            this.background.Draw(this.spriteBatch);
 
             foreach (var drawableGameObject in this.gameObjects)
             {
