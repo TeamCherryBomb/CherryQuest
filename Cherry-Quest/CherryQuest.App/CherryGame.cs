@@ -15,11 +15,12 @@
     /// </summary>
     public class CherryGame : Game
     {
+        private const int CanvasHeight = 820;
+        private const int CanvasWidth = 1680;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private List<IDrawableGameObject> gameObjects;
-        private const int CanvasHeight = 820;
-        private const int CanvasWidth = 1680;
 
         public CherryGame()
         {
@@ -36,6 +37,7 @@
         /// </summary>
         protected override void Initialize()
         {
+<<<<<<< HEAD
             // TODO: Add your initialization logic here
             this.IsMouseVisible = true;
 
@@ -45,6 +47,14 @@
 
             var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
             form.Location = new System.Drawing.Point(0, 0);
+=======
+            this.graphics.PreferredBackBufferHeight = CanvasHeight;
+            this.graphics.PreferredBackBufferWidth = CanvasWidth;
+            this.graphics.ApplyChanges();
+
+            var drawOnScreen = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
+            drawOnScreen.Location = new System.Drawing.Point(100, 100);
+>>>>>>> d7f4034b02ff273982fb903e49937fc65fa012fe
 
             base.Initialize();
         }
@@ -87,11 +97,19 @@
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
+
             foreach (var drawableGameObject in this.gameObjects)
             {
+                if (Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    if (typeof (Barbarian) == drawableGameObject.GetType())
+                    {
+                        ((Character)drawableGameObject).X += 10;
+                    }
+                }
                 drawableGameObject.Update();
             }
-            
+
             base.Update(gameTime);
         }
 
@@ -107,7 +125,6 @@
             {
                 drawableGameObject.Draw(this.spriteBatch);
             }
-            
 
             base.Draw(gameTime);
         }

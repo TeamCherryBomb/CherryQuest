@@ -22,6 +22,10 @@
             this.monsters = new HashSet<Monster>();
         }
 
+        public int X { get; set; }
+
+        public int Y { get; set; }
+
         public int Attack { get; set; }
 
         public int Defence { get; set; }

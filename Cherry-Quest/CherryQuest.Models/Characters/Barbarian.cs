@@ -9,22 +9,21 @@
     {
         private const int BarbarianAttack = 10;
         private const int BarbarianDefense = 2;
-        private const string image = "sheet";
-        private const int rowsSplit = 4;
-        private const int colsSplit = 6;
+        private const string Image = "sheet";
+        private const int RowsSplit = 4;
+        private const int ColsSplit = 6;
 
         public Barbarian(ContentManager content, int x, int y) 
-            : base(BarbarianAttack, BarbarianDefense, rowsSplit, colsSplit)
+            : base(BarbarianAttack, BarbarianDefense, RowsSplit, ColsSplit)
         {
-            this.Texture = content.Load<Texture2D>(image);
+            this.Texture = content.Load<Texture2D>(Image);
+
+            //TODO validations
             this.X = x;
             this.Y = y;
         }
 
-        //TODO validations
-        public int X { get; set; }
 
-        public int Y { get; set; }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
