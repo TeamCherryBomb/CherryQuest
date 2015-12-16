@@ -24,7 +24,6 @@
         public CherryGame()
         {
             this.graphics = new GraphicsDeviceManager(this);
-          
             this.Content.RootDirectory = "Content";
             this.gameObjects = new List<IDrawableGameObject>();
         }
@@ -38,12 +37,14 @@
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            this.IsMouseVisible = true;
+
             graphics.PreferredBackBufferHeight = CanvasHeight;
             graphics.PreferredBackBufferWidth = CanvasWidth;
             graphics.ApplyChanges();
 
             var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
-            form.Location = new System.Drawing.Point(100, 100);
+            form.Location = new System.Drawing.Point(0, 0);
 
             base.Initialize();
         }
@@ -59,9 +60,12 @@
 
             IDrawableGameObject barberian = CharacterFactory.Create("Barbarian", this.Content, 200, 50);
             IDrawableGameObject cleric = CharacterFactory.Create("Cleric", this.Content, 200, 200);
+            IDrawableGameObject ranger = CharacterFactory.Create("Ranger", this.Content, 400, 200);
+
 
             this.gameObjects.Add(barberian);
             this.gameObjects.Add(cleric);
+            this.gameObjects.Add(ranger);
         }
 
         /// <summary>

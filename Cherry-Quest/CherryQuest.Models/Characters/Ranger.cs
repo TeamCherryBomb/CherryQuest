@@ -1,21 +1,33 @@
 ﻿namespace CherryQuest.Models.Characters
 {
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
     public class Ranger : Character
     {
         private const int RangerAttack = 8;
         private const int RangerDefense = 4;
+        private const string Image = "dude";
+        private const int RowsSplit = 5;
+        private const int ColsSplit = 6;
 
         //TODO Content
-        public Ranger(Texture2D texture, int rows, int cols)
-            : base(RangerAttack, RangerDefense, rows, cols)
+        public Ranger(ContentManager content, int x, int y)
+            : base(RangerAttack, RangerDefense, RowsSplit, ColsSplit)
         {
+            this.Texture = content.Load<Texture2D>(Image);
+            this.X = x;
+            this.Y = y;
         }
+
+        public int X { get; set; }
+
+        public int Y { get; set; }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            throw new System.NotImplementedException();
+            this.Draw(spriteBatch, new Vector2(this.X, this.Y));
         }
     }
 }
