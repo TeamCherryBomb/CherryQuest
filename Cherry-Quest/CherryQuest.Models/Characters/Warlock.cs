@@ -17,5 +17,10 @@
         {
             throw new System.NotImplementedException();
         }
+
+        public override void UseSpell(string attackName)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -26,6 +26,8 @@
             this.monsters = new HashSet<Monster>();
         }
 
+        public IList<ISpell> Spells { get; set; }
+
         public int X { get; set; }
 
         public int Y { get; set; }
@@ -53,6 +55,15 @@
             get { return this.monsters; }
         }
 
+        //TODO Raise the abstraction and make different attac for different characters and different attack moves for the charachters 
+
         public ObjectState ObjectState { get; set; }
+
+        public void TakeDemage(IMonster monster)
+        {
+            monster.Health -= this.Attack - monster.Defence;
+        }
+
+        public abstract void UseSpell(string attackName);
     }
 }

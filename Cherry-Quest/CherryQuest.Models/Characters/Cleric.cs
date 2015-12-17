@@ -27,5 +27,10 @@
         {
             this.Draw(spriteBatch, new Vector2(this.X, this.Y), this.ObjectState);
         }
+
+        public override void UseSpell(string attackName)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

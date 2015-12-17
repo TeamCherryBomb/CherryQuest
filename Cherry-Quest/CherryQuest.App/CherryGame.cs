@@ -4,14 +4,17 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using System.Threading;
     using Factories;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
+    using Models;
     using Models.BackgroundObjects;
     using Models.Characters;
     using Models.Enums;
     using Models.Interfaces;
+    using Models.Monsters;
 
     /// <summary>
     /// This is the main type for your game.
@@ -25,6 +28,7 @@
         SpriteBatch spriteBatch;
         private List<IDrawableGameObject> gameObjects;
         private BackgroundObject background;
+        private Battle batlle;
 
         public CherryGame()
         {
@@ -41,9 +45,9 @@
         /// </summary>
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferHeight = CanvasHeight;
-            graphics.PreferredBackBufferWidth = CanvasWidth;
-            graphics.ApplyChanges();
+            this.graphics.PreferredBackBufferHeight = CanvasHeight;
+            this.graphics.PreferredBackBufferWidth = CanvasWidth;
+            this.graphics.ApplyChanges();
             this.IsMouseVisible = true;
 
             var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
@@ -64,15 +68,15 @@
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
 
-            this.background = new BackgroundObject(this.Content);
+            this.background = new BackgroundObject(this.Content,"bg1");
 
             IDrawableGameObject barbarian = CharacterFactory.Create("Barbarian", this.Content, 100, 400);
-            IDrawableGameObject cleric = CharacterFactory.Create("Cleric", this.Content, 500, 400);
+            IDrawableGameObject goblin = MonsterFactory.Create("Goblin", this.Content, 500, 400);
             //IDrawableGameObject ranger = CharacterFactory.Create("Ranger", this.Content, 400, 200);
 
 
             this.gameObjects.Add(barbarian);
-            this.gameObjects.Add(cleric);
+            this.gameObjects.Add(goblin);
             //this.gameObjects.Add(ranger);
         }
 
@@ -94,13 +98,14 @@
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-
+            bool checkIfMonsterDead = false;
             
             foreach (var drawableGameObject in this.gameObjects)
             {
-                if (Keyboard.GetState().GetPressedKeys().Any())
+
+                if (Keyboard.GetState().GetPressedKeys().Any() /*&& typeof(Character) == drawableGameObject.GetType()*/)
                 {
-                    if (typeof (Barbarian) == drawableGameObject.GetType() && Keyboard.GetState().IsKeyDown(Keys.D))
+                    if (typeof (Character) == drawableGameObject.GetType().BaseType && Keyboard.GetState().IsKeyDown(Keys.D))
                     {
                         ((Character) drawableGameObject).X += 10;
                         ((Character) drawableGameObject).Effects = SpriteEffects.None;
@@ -108,27 +113,45 @@
                      
                     }
 
-                    if (typeof(Barbarian) == drawableGameObject.GetType() && Keyboard.GetState().IsKeyDown(Keys.A))
+                    if (typeof(Character) == drawableGameObject.GetType().BaseType && Keyboard.GetState().IsKeyDown(Keys.A))
                     {
                         ((Character)drawableGameObject).X -= 10;
                         ((Character)drawableGameObject).Effects = SpriteEffects.FlipHorizontally;
                         ((Character)drawableGameObject).ObjectState = ObjectState.Moving;
                     }
                 }
-                else
+                else if (typeof(Character) == drawableGameObject.GetType().BaseType)
                 {
                     ((Character)drawableGameObject).ObjectState = ObjectState.Idle;
                 }
 
                 var barb = this.gameObjects.OfType<Barbarian>().First();
-                var cleric = this.gameObjects.OfType<Cleric>().FirstOrDefault();
+                var goblin = this.gameObjects.OfType<Monster>().FirstOrDefault();
 
-                if (cleric != null && barb.BoundingBox.Intersects(cleric.BoundingBox))
+                if (goblin != null && barb.BoundingBox.Intersects(goblin.BoundingBox))
                 {
-                    cleric.X += 10;
+                    barb.X -= 10;
+                    goblin.ObjectState = ObjectState.Moving;
+                    goblin.Effects = SpriteEffects.FlipHorizontally;
+                    if (Keyboard.GetState().IsKeyDown(Keys.Space) && this.batlle == null)
+                    {
+                        this.batlle = new Battle(this.spriteBatch, new BackgroundObject(this.Content, "battlebackground"), barb, goblin);
+                        this.batlle.Initialize();
+                    }
+                }
+
+                if (goblin != null && goblin.Health < 0)
+                {
+                    this.batlle = null;
+                    checkIfMonsterDead = true;
                 }
 
                 drawableGameObject.Update();
+            }
+
+            if (checkIfMonsterDead)
+            {
+                gameObjects.RemoveAll(p => p.GetType() == typeof (Goblin));
             }
 
             base.Update(gameTime);
@@ -142,14 +165,22 @@
         {
             this.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            this.background.Draw(this.spriteBatch);
-
-            foreach (var drawableGameObject in this.gameObjects)
+            if (this.batlle != null)
             {
-                drawableGameObject.Draw(this.spriteBatch);
+                this.batlle.Run(gameTime);
+            }
+            else
+            {
+                this.background.Draw(this.spriteBatch);
+
+                foreach (var drawableGameObject in this.gameObjects)
+                {
+                    drawableGameObject.Draw(this.spriteBatch);
+                }
             }
 
             base.Draw(gameTime);
         }
+
     }
 }

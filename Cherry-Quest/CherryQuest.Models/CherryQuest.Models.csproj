@@ -59,8 +59,10 @@
     <Compile Include="Interfaces\IDrawableGameObject.cs" />
     <Compile Include="Interfaces\IMonster.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
+    <Compile Include="Interfaces\ISpell.cs" />
     <Compile Include="Monsters\Angel.cs" />
     <Compile Include="Monsters\AzureDragon.cs" />
+    <Compile Include="Spells\BarbFireSpell.cs" />
     <Compile Include="Monsters\Basilisk.cs" />
     <Compile Include="Monsters\Behemoth.cs" />
     <Compile Include="Monsters\BlackDragon.cs" />
@@ -72,6 +74,8 @@
     <Compile Include="Monsters\Naga.cs" />
     <Compile Include="Enums\PlayerType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spells\BarbIceSpell.cs" />
+    <Compile Include="Spells\Spell.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

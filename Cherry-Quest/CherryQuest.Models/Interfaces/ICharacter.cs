@@ -18,5 +18,8 @@
         int Gold { get; set; }
 
         IEnumerable<Monster> Monsters { get; }
+
+        void TakeDemage(IMonster monster);
+
     }
 }

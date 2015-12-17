@@ -6,19 +6,22 @@
 
     public class BackgroundObject
     {
-        private const string Image = "bg1";
         private readonly Texture2D texture;
 
-        public BackgroundObject(ContentManager content) 
+        public BackgroundObject(ContentManager content, string img)
         {
-            this.texture = content.Load<Texture2D>(Image);
+            this.Image = img;
+            this.texture = content.Load<Texture2D>(this.Image);
         }
+
+        private string Image { get; set; }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
             spriteBatch.Draw(this.texture, new Vector2(0, 0), null,
                 Color.White, 0f, Vector2.Zero, 1.65f, SpriteEffects.None, 0f);
+            //spriteBatch.Draw(this.texture, new Vector2(0, 0));
             spriteBatch.End();
         }
     }
