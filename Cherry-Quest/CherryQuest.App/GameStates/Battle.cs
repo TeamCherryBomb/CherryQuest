@@ -1,4 +1,4 @@
-﻿namespace CherryQuest.App
+﻿namespace CherryQuest.App.GameStates
 {
     using System.Linq;
     using Microsoft.Xna.Framework;
@@ -6,28 +6,35 @@
     using Microsoft.Xna.Framework.Input;
     using Models.BackgroundObjects;
     using Models.Characters;
+    using Models.Interfaces;
     using Models.Monsters;
-    using Models.Spells;
 
-    public class Battle : CherryGame
+    public class Battle : GameState , IBattle
     {
+        private const int  MonsterStartX = 1400;
+        private const int  CharecterStartX = 0;
+
+        //Vsichko zakomentirano trqbva da se iztrie idva ot GameState ostavam go da ti e po-lesno da se orientirash
+
         public Battle(SpriteBatch spriteBatch, BackgroundObject background, Character character, Monster monster)
+            :base(background, character, spriteBatch)
         {
-            this.Background = background;
-            this.Character = character;
+            
+            //this.Background = background;
+            //this.Character = character;
             this.Monster = monster;
-            this.SpriteBatch = spriteBatch;
+            //this.SpriteBatch = spriteBatch;
         }
 
-        private BackgroundObject Background { get; set; }
+        // public BackgroundObject Background { get; set; }
 
-        private Character Character { get; set; }
+        // public Character Character { get; set; }
 
-        private Monster Monster { get; set; }
+        public Monster Monster { get; set; }
 
-        private SpriteBatch SpriteBatch { get; set; }
+        //public SpriteBatch SpriteBatch { get; set; }
 
-        public void Run(GameTime gameTime)
+        public override void Run(GameTime gameTime)
         {
 
             this.Update();
@@ -36,10 +43,13 @@
 
         protected override void Initialize()
         {
-            this.Character.X = 0;
-            this.Monster.X = 1400;
-
-            
+            this.Character.X = CharecterStartX;
+            this.Monster.X = MonsterStartX;
+            foreach (var spell in this.Character.Spells)
+            {
+               
+                    spell.Dispose();
+            }
         }
 
 
@@ -65,6 +75,8 @@
                     this.Character.TakeDemage(this.Monster);
                     spell.Dispose();
                 }
+
+                spell.Update();
             }
 
         }
@@ -78,11 +90,10 @@
             {
                 foreach (var spell in this.Character.Spells)
                 {
-                    //TODO the spell is not animaited, I couldn't worked it out, Edo need help
                     spell.Draw(this.SpriteBatch);
                 }
             }
-            
+
         }
 
     }

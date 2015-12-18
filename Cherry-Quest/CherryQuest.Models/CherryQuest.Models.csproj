@@ -55,6 +55,8 @@
     <Compile Include="Enums\ObjectState.cs" />
     <Compile Include="Exceptions\ExperienceException.cs" />
     <Compile Include="Exceptions\UnknownCharacterClassException.cs" />
+    <Compile Include="Interfaces\IBattle.cs" />
+    <Compile Include="Interfaces\IChangeGameState.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
     <Compile Include="Interfaces\IDrawableGameObject.cs" />
     <Compile Include="Interfaces\IMonster.cs" />

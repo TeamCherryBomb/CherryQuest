@@ -10,8 +10,8 @@
     public class BarbFireSpell : Spell
     {
         private const string Image = "firespell";
-        private const int RowsSplit = 5;
-        private const int ColsSplit = 4;
+        private const int RowsSplit = 4;
+        private const int ColsSplit = 5;
 
         public BarbFireSpell(ContentManager content, int x, int y) : base(RowsSplit, ColsSplit)
         {

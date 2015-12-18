@@ -33,7 +33,7 @@
         }
 
         //TODO could be make list of spell and factory
-        
+
 
         public ContentManager ContentManager { get; set; }
 
@@ -49,12 +49,12 @@
             {
                 case "Fire":
                     {
-                        this.Spells.Add(new BarbFireSpell(this.ContentManager, this.X + 30, this.Y-30));
+                        this.Spells.Add(new BarbFireSpell(this.ContentManager, this.X + 125, this.Y + 50));
                         break;
                     }
                 case "Ice":
                     {
-                        this.Spells.Add(new BarbIceSpell(this.ContentManager, this.X + 30, this.Y-30));
+                        this.Spells.Add(new BarbIceSpell(this.ContentManager, this.X + 125, this.Y + 50));
                         break;
                     }
 

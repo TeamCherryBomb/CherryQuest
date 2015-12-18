@@ -42,11 +42,12 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Battle.cs" />
+    <Compile Include="GameStates\Battle.cs" />
     <Compile Include="CherryGame.cs" />
     <Compile Include="Factories\CharacterFactory.cs" />
     <Compile Include="Factories\MonsterFactory.cs" />
     <Compile Include="GameMain.cs" />
+    <Compile Include="GameStates\GameState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,7 @@
     using System.Reflection;
     using System.Threading;
     using Factories;
+    using GameStates;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
@@ -72,12 +73,12 @@
 
             IDrawableGameObject barbarian = CharacterFactory.Create("Barbarian", this.Content, 100, 400);
             IDrawableGameObject goblin = MonsterFactory.Create("Goblin", this.Content, 500, 400);
-            //IDrawableGameObject ranger = CharacterFactory.Create("Ranger", this.Content, 400, 200);
+            IDrawableGameObject blackDragon = MonsterFactory.Create("BlackDragon", this.Content, 1200, 450);
 
 
             this.gameObjects.Add(barbarian);
             this.gameObjects.Add(goblin);
-            //this.gameObjects.Add(ranger);
+            this.gameObjects.Add(blackDragon);
         }
 
         /// <summary>
@@ -99,7 +100,10 @@
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
             bool checkIfMonsterDead = false;
-            
+
+            var charachter = this.gameObjects.OfType<Character>().First();
+            var currMonster = this.gameObjects.OfType<Monster>().FirstOrDefault();
+
             foreach (var drawableGameObject in this.gameObjects)
             {
 
@@ -125,22 +129,21 @@
                     ((Character)drawableGameObject).ObjectState = ObjectState.Idle;
                 }
 
-                var barb = this.gameObjects.OfType<Barbarian>().First();
-                var goblin = this.gameObjects.OfType<Monster>().FirstOrDefault();
+               
 
-                if (goblin != null && barb.BoundingBox.Intersects(goblin.BoundingBox))
+                if (currMonster != null && charachter.BoundingBox.Intersects(currMonster.BoundingBox))
                 {
-                    barb.X -= 10;
-                    goblin.ObjectState = ObjectState.Moving;
-                    goblin.Effects = SpriteEffects.FlipHorizontally;
+                    charachter.X -= 10;
+                    currMonster.ObjectState = ObjectState.Moving;
+                    currMonster.Effects = SpriteEffects.FlipHorizontally;
                     if (Keyboard.GetState().IsKeyDown(Keys.Space) && this.batlle == null)
                     {
-                        this.batlle = new Battle(this.spriteBatch, new BackgroundObject(this.Content, "battlebackground"), barb, goblin);
+                        this.batlle = new Battle(this.spriteBatch, new BackgroundObject(this.Content, "battlebackground"), charachter, currMonster);
                         this.batlle.Initialize();
                     }
                 }
 
-                if (goblin != null && goblin.Health < 0)
+                if (currMonster != null && currMonster.Health < 0)
                 {
                     this.batlle = null;
                     checkIfMonsterDead = true;
@@ -151,7 +154,7 @@
 
             if (checkIfMonsterDead)
             {
-                gameObjects.RemoveAll(p => p.GetType() == typeof (Goblin));
+                this.gameObjects.Remove(currMonster);
             }
 
             base.Update(gameTime);
