@@ -113,49 +113,22 @@
             {
                 bool checkIfMonsterDead = false;
 
-                var charachter = this.gameObjects.OfType<Character>().First();
+                var character = this.gameObjects.OfType<Character>().First();
                 var currMonster = this.gameObjects.OfType<Monster>().FirstOrDefault();
 
+                this.MoveCharacter(character);
 
                 foreach (var drawableGameObject in this.gameObjects)
                 {
-
-                    if (Keyboard.GetState().GetPressedKeys().Any()
-                        /*&& typeof(Character) == drawableGameObject.GetType()*/)
+                    if (currMonster != null && character.BoundingBox.Intersects(currMonster.BoundingBox))
                     {
-                        if (typeof(Character) == drawableGameObject.GetType().BaseType &&
-                            Keyboard.GetState().IsKeyDown(Keys.D))
-                        {
-                            ((Character)drawableGameObject).X += 10;
-                            ((Character)drawableGameObject).Effects = SpriteEffects.None;
-                            ((Character)drawableGameObject).ObjectState = ObjectState.Moving;
-
-                        }
-
-                        if (typeof(Character) == drawableGameObject.GetType().BaseType &&
-                            Keyboard.GetState().IsKeyDown(Keys.A))
-                        {
-                            ((Character)drawableGameObject).X -= 10;
-                            ((Character)drawableGameObject).Effects = SpriteEffects.FlipHorizontally;
-                            ((Character)drawableGameObject).ObjectState = ObjectState.Moving;
-                        }
-                    }
-                    else if (typeof(Character) == drawableGameObject.GetType().BaseType)
-                    {
-                        ((Character)drawableGameObject).ObjectState = ObjectState.Idle;
-                    }
-
-
-
-                    if (currMonster != null && charachter.BoundingBox.Intersects(currMonster.BoundingBox))
-                    {
-                        charachter.X -= 10;
+                        character.X -= 10;
                         currMonster.ObjectState = ObjectState.Moving;
                         currMonster.Effects = SpriteEffects.FlipHorizontally;
                         if (this.battle == null)
                         {
                             this.battle = new Battle(this.spriteBatch,
-                                new BackgroundObject(this.Content, "battlebackground"), charachter, currMonster);
+                                new BackgroundObject(this.Content, "battlebackground"), character, currMonster);
                             this.battle.Initialize();
                         }
                     }
@@ -190,7 +163,7 @@
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            this.GraphicsDevice.Clear(Color.CornflowerBlue);
+            this.GraphicsDevice.Clear(Color.White);
 
             if (this.startMenu != null)
             {
@@ -213,6 +186,22 @@
                 }
             }
             base.Draw(gameTime);
+        }
+
+        private void MoveCharacter(Character character)
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                character.MoveRight();
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                character.MoveLeft();
+            }
+            else
+            {
+                character.ObjectState = ObjectState.Idle;
+            }
         }
     }
 }

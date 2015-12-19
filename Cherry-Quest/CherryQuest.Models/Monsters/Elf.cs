@@ -1,5 +1,6 @@
 ﻿namespace CherryQuest.Models.Monsters
 {
+    using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
     public class Elf : Monster
@@ -9,8 +10,8 @@
         private const int ElfDefence = 10;
 
         //TODO Content
-        public Elf(Texture2D texture, int rows, int cols)
-            : base(ElfHealth, ElfAttack, ElfDefence, rows, cols)
+        public Elf(int rows, int cols, ContentManager content)
+            : base(ElfHealth, ElfAttack, ElfDefence, rows, cols, content)
         {
         }
 

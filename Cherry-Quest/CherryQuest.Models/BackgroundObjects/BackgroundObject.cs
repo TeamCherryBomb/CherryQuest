@@ -14,7 +14,7 @@
             this.texture = content.Load<Texture2D>(this.Image);
         }
 
-        private string Image { get; set; }
+        private string Image { get; }
 
         public void Draw(SpriteBatch spriteBatch)
         {

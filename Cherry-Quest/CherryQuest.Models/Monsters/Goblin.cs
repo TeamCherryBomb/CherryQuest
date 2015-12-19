@@ -15,7 +15,7 @@
 
         //TODO Content
         public Goblin(ContentManager content, int x, int y)
-            : base(GoblinHealth, GoblinAttack, GoblinDefence, RowsSplit, ColsSplit)
+            : base(GoblinHealth, GoblinAttack, GoblinDefence, RowsSplit, ColsSplit, content)
         {
             this.Texture = content.Load<Texture2D>(Image);
 

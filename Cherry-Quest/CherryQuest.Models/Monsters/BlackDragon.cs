@@ -15,7 +15,7 @@
 
         //TODO Content
         public BlackDragon(ContentManager content, int x, int y)
-            : base(BlackHealth, BlackAttack, BlackDefence, RowsSplit, ColsSplit)
+            : base(BlackHealth, BlackAttack, BlackDefence, RowsSplit, ColsSplit, content)
         {
             this.Texture = content.Load<Texture2D>(Image);
 

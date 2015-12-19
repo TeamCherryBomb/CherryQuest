@@ -37,7 +37,7 @@
         public override void Run(GameTime gameTime)
         {
 
-            this.Update();
+            this.Update(gameTime);
             this.Draw(gameTime);
         }
 
@@ -53,7 +53,7 @@
         }
 
 
-        private void Update()
+        protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.X))
             {
@@ -64,6 +64,8 @@
                 this.Character.UseSpell("Ice");
             }
 
+            this.Monster.PerformAttack(gameTime);
+
             foreach (var spell in this.Character.Spells)
             {
                 if (!spell.BoundingBox.Intersects(this.Monster.BoundingBox))
@@ -73,6 +75,21 @@
                 else
                 {
                     this.Character.TakeDemage(this.Monster);
+                    spell.Dispose();
+                }
+
+                spell.Update();
+            }
+
+            foreach (var spell in this.Monster.Attacks)
+            {
+                if (!spell.BoundingBox.Intersects(this.Character.BoundingBox))
+                {
+                    spell.X -= 15;
+                }
+                else
+                {
+                    //this.Character.TakeDemage(this.Monster);
                     spell.Dispose();
                 }
 
@@ -94,7 +111,13 @@
                 }
             }
 
+            if (this.Monster.Attacks.Any())
+            {
+                foreach (var spell in this.Monster.Attacks)
+                {
+                    spell.Draw(this.SpriteBatch);
+                }
+            }
         }
-
     }
 }
