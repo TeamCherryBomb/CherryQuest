@@ -7,6 +7,7 @@
     using System.Threading;
     using Factories;
     using GameStates;
+    using Menu;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
@@ -29,13 +30,16 @@
         SpriteBatch spriteBatch;
         private List<IDrawableGameObject> gameObjects;
         private BackgroundObject background;
-        private Battle batlle;
+        private Battle battle;
+
+        private StartMenu startMenu;
 
         public CherryGame()
         {
             this.graphics = new GraphicsDeviceManager(this);
             this.Content.RootDirectory = "Content";
             this.gameObjects = new List<IDrawableGameObject>();
+            this.startMenu = new StartMenu();
         }
 
         /// <summary>
@@ -69,7 +73,8 @@
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
 
-            this.background = new BackgroundObject(this.Content,"bg1");
+            this.background = new BackgroundObject(this.Content, "bg1");
+            this.startMenu.LoadContent(this.Content);
 
             IDrawableGameObject barbarian = CharacterFactory.Create("Barbarian", this.Content, 100, 400);
             IDrawableGameObject goblin = MonsterFactory.Create("Goblin", this.Content, 500, 400);
@@ -99,65 +104,84 @@
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-            bool checkIfMonsterDead = false;
 
-            var charachter = this.gameObjects.OfType<Character>().First();
-            var currMonster = this.gameObjects.OfType<Monster>().FirstOrDefault();
-
-            foreach (var drawableGameObject in this.gameObjects)
+            if (this.startMenu != null)
             {
+                this.startMenu.Update();
+            }
+            else
+            {
+                bool checkIfMonsterDead = false;
 
-                if (Keyboard.GetState().GetPressedKeys().Any() /*&& typeof(Character) == drawableGameObject.GetType()*/)
+                var charachter = this.gameObjects.OfType<Character>().First();
+                var currMonster = this.gameObjects.OfType<Monster>().FirstOrDefault();
+
+
+                foreach (var drawableGameObject in this.gameObjects)
                 {
-                    if (typeof (Character) == drawableGameObject.GetType().BaseType && Keyboard.GetState().IsKeyDown(Keys.D))
+
+                    if (Keyboard.GetState().GetPressedKeys().Any()
+                        /*&& typeof(Character) == drawableGameObject.GetType()*/)
                     {
-                        ((Character) drawableGameObject).X += 10;
-                        ((Character) drawableGameObject).Effects = SpriteEffects.None;
-                        ((Character) drawableGameObject).ObjectState = ObjectState.Moving;
-                     
+                        if (typeof(Character) == drawableGameObject.GetType().BaseType &&
+                            Keyboard.GetState().IsKeyDown(Keys.D))
+                        {
+                            ((Character)drawableGameObject).X += 10;
+                            ((Character)drawableGameObject).Effects = SpriteEffects.None;
+                            ((Character)drawableGameObject).ObjectState = ObjectState.Moving;
+
+                        }
+
+                        if (typeof(Character) == drawableGameObject.GetType().BaseType &&
+                            Keyboard.GetState().IsKeyDown(Keys.A))
+                        {
+                            ((Character)drawableGameObject).X -= 10;
+                            ((Character)drawableGameObject).Effects = SpriteEffects.FlipHorizontally;
+                            ((Character)drawableGameObject).ObjectState = ObjectState.Moving;
+                        }
+                    }
+                    else if (typeof(Character) == drawableGameObject.GetType().BaseType)
+                    {
+                        ((Character)drawableGameObject).ObjectState = ObjectState.Idle;
                     }
 
-                    if (typeof(Character) == drawableGameObject.GetType().BaseType && Keyboard.GetState().IsKeyDown(Keys.A))
+
+
+                    if (currMonster != null && charachter.BoundingBox.Intersects(currMonster.BoundingBox))
                     {
-                        ((Character)drawableGameObject).X -= 10;
-                        ((Character)drawableGameObject).Effects = SpriteEffects.FlipHorizontally;
-                        ((Character)drawableGameObject).ObjectState = ObjectState.Moving;
+                        charachter.X -= 10;
+                        currMonster.ObjectState = ObjectState.Moving;
+                        currMonster.Effects = SpriteEffects.FlipHorizontally;
+                        if (this.battle == null)
+                        {
+                            this.battle = new Battle(this.spriteBatch,
+                                new BackgroundObject(this.Content, "battlebackground"), charachter, currMonster);
+                            this.battle.Initialize();
+                        }
                     }
-                }
-                else if (typeof(Character) == drawableGameObject.GetType().BaseType)
-                {
-                    ((Character)drawableGameObject).ObjectState = ObjectState.Idle;
-                }
 
-               
-
-                if (currMonster != null && charachter.BoundingBox.Intersects(currMonster.BoundingBox))
-                {
-                    charachter.X -= 10;
-                    currMonster.ObjectState = ObjectState.Moving;
-                    currMonster.Effects = SpriteEffects.FlipHorizontally;
-                    if (Keyboard.GetState().IsKeyDown(Keys.Space) && this.batlle == null)
+                    if (currMonster != null && currMonster.Health < 0)
                     {
-                        this.batlle = new Battle(this.spriteBatch, new BackgroundObject(this.Content, "battlebackground"), charachter, currMonster);
-                        this.batlle.Initialize();
+                        this.battle = null;
+                        checkIfMonsterDead = true;
                     }
+
+                    drawableGameObject.Update();
                 }
 
-                if (currMonster != null && currMonster.Health < 0)
+                if (checkIfMonsterDead)
                 {
-                    this.batlle = null;
-                    checkIfMonsterDead = true;
+                    this.gameObjects.Remove(currMonster);
                 }
-
-                drawableGameObject.Update();
             }
 
-            if (checkIfMonsterDead)
+            if (this.startMenu?.MenuState == MenuState.Playing)
             {
-                this.gameObjects.Remove(currMonster);
+                this.startMenu = null;
             }
 
             base.Update(gameTime);
+
         }
 
         /// <summary>
@@ -168,22 +192,27 @@
         {
             this.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            if (this.batlle != null)
+            if (this.startMenu != null)
             {
-                this.batlle.Run(gameTime);
+                this.startMenu.Draw(this.spriteBatch);
             }
             else
             {
-                this.background.Draw(this.spriteBatch);
-
-                foreach (var drawableGameObject in this.gameObjects)
+                if (this.battle != null)
                 {
-                    drawableGameObject.Draw(this.spriteBatch);
+                    this.battle.Run(gameTime);
+                }
+                else
+                {
+                    this.background.Draw(this.spriteBatch);
+
+                    foreach (var drawableGameObject in this.gameObjects)
+                    {
+                        drawableGameObject.Draw(this.spriteBatch);
+                    }
                 }
             }
-
             base.Draw(gameTime);
         }
-
     }
 }

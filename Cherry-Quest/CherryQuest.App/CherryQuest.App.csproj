@@ -48,6 +48,9 @@
     <Compile Include="Factories\MonsterFactory.cs" />
     <Compile Include="GameMain.cs" />
     <Compile Include="GameStates\GameState.cs" />
+    <Compile Include="Menu\MenuElement.cs" />
+    <Compile Include="Menu\MenuState.cs" />
+    <Compile Include="Menu\StartMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
