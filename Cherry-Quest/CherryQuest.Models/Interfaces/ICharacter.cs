@@ -11,15 +11,21 @@
 
         int Defence { get; set; }
 
+        int Health { get; }
+
         Rectangle BoundingBox { get; }
 
-        CharacterLevel Level { get; set; }
+        CharacterLevel Level { get; }
 
-        int Gold { get; set; }
+        int Gold { get; }
+
+        void IncreaseGold(int value);
 
         IEnumerable<Monster> Monsters { get; }
 
-        void TakeDemage(IMonster monster);
+        void DealDamage(IMonster monster);
+
+        void RespondToAttack(int damage, GameTime gameTime);
 
     }
 }

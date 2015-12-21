@@ -13,6 +13,7 @@
         public const int DefaultStartingHealth = 100;
 
         private readonly IEnumerable<Monster> monsters;
+        private int health;
 
         protected Character(int attack, int defence, int rows, int cols)
             : base(rows, cols)
@@ -36,7 +37,17 @@
 
         public int Defence { get; set; }
 
-        public int Health { get; set; }
+        public int Health
+        {
+            get
+            {
+                return this.health;
+            }
+            private set
+            {
+                this.health = value > 0 ? value : 0;
+            }
+        }
 
         public Rectangle BoundingBox
         {
@@ -48,9 +59,9 @@
             }
         }
 
-        public CharacterLevel Level { get; set; }
+        public CharacterLevel Level { get; private set; }
 
-        public int Gold { get; set; } // cherries
+        public int Gold { get; private set; } 
 
         public virtual IEnumerable<Monster> Monsters
         {
@@ -61,9 +72,23 @@
 
         public ObjectState ObjectState { get; set; }
 
-        public void TakeDemage(IMonster monster)
+        public void DealDamage(IMonster monster)
         {
             monster.Health -= this.Attack - monster.Defence;
+        }
+
+        public void RespondToAttack(int damage, GameTime gameTime)
+        {
+            //make the character block 33% of the time ... hopefully : )
+            if (gameTime.TotalGameTime.Milliseconds % 3 != 0)
+            {
+                this.Health -= damage;
+            }
+        }
+
+        public void IncreaseGold(int value)
+        {
+            this.Gold += value;
         }
 
         public abstract void UseSpell(string attackName);

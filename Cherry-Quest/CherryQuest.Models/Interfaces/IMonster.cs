@@ -1,6 +1,5 @@
 ﻿namespace CherryQuest.Models.Interfaces
 {
-    using Enums;
     using Microsoft.Xna.Framework;
 
     public interface IMonster : IDrawableGameObject, IMovable

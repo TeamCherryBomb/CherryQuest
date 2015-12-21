@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Reflection;
     using Microsoft.Xna.Framework.Content;
-    using Microsoft.Xna.Framework.Graphics;
     using Models.Exceptions;
     using Models.Interfaces;
 

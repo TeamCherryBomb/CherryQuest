@@ -4,7 +4,6 @@
     using Characters;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using Monsters;
 
     public interface IChangeGameState
     {

@@ -3,7 +3,6 @@
     using Enums;
     using Interfaces;
     using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
 
     public abstract class Spell : DrawableGameObject, ISpell
     {

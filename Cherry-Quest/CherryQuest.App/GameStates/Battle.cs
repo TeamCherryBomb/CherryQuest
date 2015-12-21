@@ -9,30 +9,21 @@
     using Models.Interfaces;
     using Models.Monsters;
 
-    public class Battle : GameState , IBattle
+    public class Battle : GameState, IBattle
     {
-        private const int  MonsterStartX = 1400;
-        private const int  CharecterStartX = 0;
+        private const int MonsterStartX = 1400;
+        private const int CharacterStartX = 0;
 
-        //Vsichko zakomentirano trqbva da se iztrie idva ot GameState ostavam go da ti e po-lesno da se orientirash
+        private readonly SpriteFont font;
 
-        public Battle(SpriteBatch spriteBatch, BackgroundObject background, Character character, Monster monster)
-            :base(background, character, spriteBatch)
+        public Battle(SpriteBatch spriteBatch, BackgroundObject background, Character character, Monster monster, SpriteFont font)
+            : base(background, character, spriteBatch)
         {
-            
-            //this.Background = background;
-            //this.Character = character;
             this.Monster = monster;
-            //this.SpriteBatch = spriteBatch;
+            this.font = font;
         }
 
-        // public BackgroundObject Background { get; set; }
-
-        // public Character Character { get; set; }
-
         public Monster Monster { get; set; }
-
-        //public SpriteBatch SpriteBatch { get; set; }
 
         public override void Run(GameTime gameTime)
         {
@@ -43,15 +34,13 @@
 
         protected override void Initialize()
         {
-            this.Character.X = CharecterStartX;
+            this.Character.X = CharacterStartX;
             this.Monster.X = MonsterStartX;
             foreach (var spell in this.Character.Spells)
             {
-               
-                    spell.Dispose();
+                spell.Dispose();
             }
         }
-
 
         protected override void Update(GameTime gameTime)
         {
@@ -74,7 +63,7 @@
                 }
                 else
                 {
-                    this.Character.TakeDemage(this.Monster);
+                    this.Character.DealDamage(this.Monster);
                     spell.Dispose();
                 }
 
@@ -89,7 +78,7 @@
                 }
                 else
                 {
-                    //this.Character.TakeDemage(this.Monster);
+                    this.Character.RespondToAttack(this.Monster.Attack, gameTime);
                     spell.Dispose();
                 }
 
@@ -103,6 +92,9 @@
             this.Background.Draw(this.SpriteBatch);
             this.Monster.Draw(this.SpriteBatch);
             this.Character.Draw(this.SpriteBatch);
+
+            this.DrawStats();
+
             if (this.Character.Spells.Any())
             {
                 foreach (var spell in this.Character.Spells)
@@ -118,6 +110,14 @@
                     spell.Draw(this.SpriteBatch);
                 }
             }
+        }
+
+        protected override void DrawStats()
+        {
+            this.SpriteBatch.Begin();
+            this.SpriteBatch.DrawString(this.font, $"Health: {this.Character.Health}", new Vector2(30, 30), Color.White);
+            this.SpriteBatch.DrawString(this.font, $"Health: {this.Monster.Health}", new Vector2(800, 30), Color.White);
+            this.SpriteBatch.End();
         }
     }
 }

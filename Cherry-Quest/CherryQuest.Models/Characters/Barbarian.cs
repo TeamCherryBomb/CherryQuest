@@ -1,15 +1,10 @@
 ﻿namespace CherryQuest.Models.Characters
 {
-    using System.Collections;
     using System.Collections.Generic;
-    using System.Runtime;
-    using Enums;
     using Interfaces;
-    using Microsoft.Win32.SafeHandles;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
-    using Monsters;
     using Spells;
 
     public class Barbarian : Character
